@@ -1,0 +1,39 @@
+package objects.entity.enemy.boss;
+
+import java.awt.Graphics2D;
+
+import main.GamePanel;
+import main.util.ImageManager;
+import main.util.SoundManager;
+
+public class Queen extends Boss {
+
+	public Queen(GamePanel gp) {
+		super(gp);
+        init();
+	}
+
+    public void init(){
+        this.width = 48;
+        this.height = 48*2;
+
+        this.hitDamage = 12;
+        this.speed = 22;
+
+        this.image = ImageManager.loadBufferedImage("res/images/entity/W_Queen.png");
+        this.soundManager = SoundManager.getInstance();
+    }
+
+	@Override
+	public void update() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void draw(Graphics2D g2) {
+		// TODO Auto-generated method stub
+		
+	}    
+
+}
