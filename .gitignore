@@ -1,3 +1,6 @@
+.gitignore
+.gitattributes
+
 # Compiled class file
 *.class
 
