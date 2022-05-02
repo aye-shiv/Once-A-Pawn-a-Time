@@ -7,6 +7,7 @@ import main.util.ImageManager;
 import main.util.SoundManager;
 
 public class Rook extends Boss {
+
 	public Rook(GamePanel gp) {
 		super(gp);
         init();
@@ -16,22 +17,22 @@ public class Rook extends Boss {
         this.width = 48;
         this.height = 48*2;
 
-        this.hitDamage = 12;
-        this.speed = 22;
+        setSpeedX(22);
 
         this.image = ImageManager.loadBufferedImage("res/entity/W_Knight.png");
         this.soundManager = SoundManager.getInstance();
     }
 
     @Override
-    public void update() {
-        // TODO Auto-generated method stub
-        
+    public void draw(Graphics2D g2) {
+
+        this.weapon.draw(g2);
     }
 
     @Override
-    public void draw(Graphics2D g2) {
-        // TODO Auto-generated method stub
-        
-    }    
+    public void update() {
+
+        this.weapon.update();
+    }
+
 }

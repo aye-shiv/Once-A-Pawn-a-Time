@@ -17,8 +17,7 @@ public class Queen extends Boss {
         this.width = 48;
         this.height = 48*2;
 
-        this.hitDamage = 12;
-        this.speed = 22;
+		setSpeedX(22);
 
         this.image = ImageManager.loadBufferedImage("res/images/entity/W_Queen.png");
         this.soundManager = SoundManager.getInstance();
@@ -27,13 +26,15 @@ public class Queen extends Boss {
 	@Override
 	public void update() {
 		// TODO Auto-generated method stub
-		
+
+		this.weapon.update();
 	}
 
 	@Override
 	public void draw(Graphics2D g2) {
 		// TODO Auto-generated method stub
-		
+
+		this.weapon.draw(g2);
 	}    
 
 }

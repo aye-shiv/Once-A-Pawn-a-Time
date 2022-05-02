@@ -1,15 +1,18 @@
 package objects.weapon;
 
+import objects.entity.Entity;
 import objects.entity.Player;
 import main.GamePanel;
 
 import main.util.ImageManager;
 import main.util.SoundManager;
 
+import java.awt.*;
+
 public class Cannon extends Weapon {
 
-	public Cannon(GamePanel gp, Player player) {
-		super(gp, player);
+	public Cannon(GamePanel gp, Entity entity) {
+		super(gp, entity);
         init();
 	}
 
@@ -17,14 +20,29 @@ public class Cannon extends Weapon {
         this.width = 4;
         this.height = 6;
 
-        this.worldX = player.getWorldX();
-        this.worldY = player.getWorldY();
+        this.worldX = entity.getWorldX();
+        this.worldY = entity.getWorldY();
 
-        this.hitDamage = 2;
-        this.speed = 4;
+        this.hitDamage = 15;
+        this.speed = 7;
 
         this.image = ImageManager.loadBufferedImage("");
         this.soundManager = SoundManager.getInstance();
     }
-    
+
+    @Override
+    public void draw(Graphics2D g2) {
+
+    }
+
+    @Override
+    public void update() {
+
+    }
+
+    @Override
+    public void attack() {
+
+    }
+
 }

@@ -13,11 +13,7 @@ public abstract class Boss extends Enemy {
 
     public void init() {
         this.worldX = (gp.maxScrollCol-3) * gp.tileSize;
-        this.worldY = gp.tileSize*4;
+        this.worldY = gp.tileSize*7;
     }
-
-    public abstract void update();
-    public abstract void draw(Graphics2D g2);
-
 
 }

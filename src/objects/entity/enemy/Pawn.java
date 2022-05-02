@@ -7,6 +7,7 @@ import main.GamePanel;
 import main.util.ImageManager;
 import main.util.SoundManager;
 import main.util.Utils;
+import objects.weapon.Dagger;
 
 public class Pawn extends Enemy {
 
@@ -16,31 +17,34 @@ public class Pawn extends Enemy {
 	}
 
     public void init() {
+        this.width = 45;
+        this.height = 70;
+
         this.worldX = Utils.getRandom(13*gp.tileSize, (gp.maxScrollCol-7)*gp.tileSize);
-        this.worldY = gp.tileSize*8;
+        this.worldY = gp.worldFloorY - height;
 
-        this.width = 48;
-        this.height = 48*2;
-
-        this.hitDamage = 2;
-        this.speed = 3;
+        setSpeedX(3);
 
         this.image = ImageManager.loadBufferedImage("res/images/entity/W_Pawn.png");
         this.soundManager = SoundManager.getInstance();
+
+        setWeapon(new Dagger(gp, this));
     }
 
 
     public void update(){
 
+        this.weapon.update();
     }
 
     public void draw(Graphics2D g2){
         screenX = worldX - gp.player.getWorldX() + gp.player.getScreenX();
-        screenY = gp.player.getScreenY();
+        screenY = worldY;
         if(gp.player.getWorldX() > (gp.maxScrollCol-14)*gp.tileSize){
             screenX = worldX - ((gp.maxScrollCol-15)*gp.tileSize);
         }
 
         g2.drawImage(image, screenX, screenY, width, height, null);
+        this.weapon.draw(g2);
     }
 }

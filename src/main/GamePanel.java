@@ -39,6 +39,7 @@ public class GamePanel extends JPanel implements Runnable {
     public final int maxScrollRow = 15;
     public final int worldWidth = tileSize * maxScrollCol;
     public final int worldHeight = tileSize * maxScrollRow;
+    public final int worldFloorY = (worldHeight - tileSize*5);
 
     final public int screenWidth = width;
     final public int screenHeight = height;
@@ -121,7 +122,7 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void updateEntities(){
-        player.update(this);
+        player.update();
         for(Pawn pawn:pawns){
             pawn.update();
         }

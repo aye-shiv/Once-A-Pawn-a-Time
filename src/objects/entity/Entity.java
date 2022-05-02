@@ -2,24 +2,27 @@ package objects.entity;
 
 import main.GamePanel;
 import objects.GameObject;
+import objects.weapon.Weapon;
 
 public abstract class Entity extends GameObject {
 
-	public Entity(GamePanel gp) {
+    public static int FACING_LEFT = 1;
+    public static int FACING_RIGHT = 2;
+
+    public Entity(GamePanel gp) {
 		super(gp);
 	}
 
 
-    protected int speed = 0;
-    protected int hitDamage = 0;
+    protected Weapon weapon;
     protected int maxHP = 0, hp = 0;
+    protected int facing = FACING_RIGHT;
 
 
     /* =====Custom==== */
     public void takeHealth(int health){
         hp += health;
     }
-
     public void takeDamage(int damage) {
         hp -= damage;
     }
@@ -27,15 +30,23 @@ public abstract class Entity extends GameObject {
 
     /* =====Getters==== */
 
-    public int getSpeed() { return speed; }
-    public int getHitDamage() { return hitDamage; }
-
-    public int getmaxHP() { return maxHP; }
+    public int getMaxHP() { return maxHP; }
     public int getHP() { return hp; }
 
+    public Weapon getWeapon() { return weapon; }
+    public int getFacing() { return facing; }
     /* =====Setters==== */
 
+    public void setWeapon(Weapon weapon) { this.weapon = weapon; }
 
-    public void setSpeed(int speed) { this.speed = speed; }
-    public void setHitDamage(int damage) { this.hitDamage = damage; }
+
+    public void moveLeft(){
+        super.moveLeft();
+        facing = Entity.FACING_LEFT;
+    }
+
+    public void moveRight(){
+        super.moveRight();
+        facing = Entity.FACING_RIGHT;
+    }
 }
