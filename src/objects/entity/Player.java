@@ -33,8 +33,8 @@ public class Player extends Entity {
         //setWeapon(new Sword(gp, this));
         //setWeapon(new Staff(gp, this));
         //setWeapon(new Dagger(gp, this));
-        setWeapon(new Spear(gp, this));
-        //setWeapon(new Cannon(gp, this));
+        //setWeapon(new Spear(gp, this));
+        setWeapon(new Cannon(gp, this));
     }
 
     @Override

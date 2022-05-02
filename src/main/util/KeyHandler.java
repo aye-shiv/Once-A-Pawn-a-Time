@@ -64,5 +64,14 @@ public class KeyHandler implements KeyListener {
 		if (keyCode == KeyEvent.VK_SPACE){
 			spacePressed = false;
 		}
+		if(keyCode == KeyEvent.VK_2){
+			if(gp.getGSM().getLevel()<2)gp.getGSM().increaseLvl();
+		}
+		if(keyCode == KeyEvent.VK_3){
+			if(gp.getGSM().getLevel()<3)gp.getGSM().increaseLvl();
+		}
+		if(keyCode == KeyEvent.VK_4){
+			if(gp.getGSM().getLevel()<4)gp.getGSM().increaseLvl();
+		}
     }
 }
