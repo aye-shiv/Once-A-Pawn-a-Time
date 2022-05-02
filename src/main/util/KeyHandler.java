@@ -7,10 +7,12 @@ import main.GamePanel;
 
 public class KeyHandler implements KeyListener {
 
+	private GamePanel gp;
     public boolean upPressed=false, downPressed=false, leftPressed=false, rightPressed=false;
 	public boolean spacePressed=false;
 
     public KeyHandler(GamePanel gp) {
+		this.gp = gp;
         gp.addKeyListener(this);
     }
 
@@ -35,6 +37,12 @@ public class KeyHandler implements KeyListener {
 		}
 		if (keyCode == KeyEvent.VK_SPACE){
 			spacePressed = true;
+		}
+		if(keyCode == KeyEvent.VK_ESCAPE){
+			gp.getGSM().setState(2);
+		}
+		if(keyCode == KeyEvent.VK_BACK_SPACE){
+			gp.getGSM().setState(1);
 		}
     }
 

@@ -7,6 +7,7 @@ import entity.Player;
 import entity.enemy.Pawn;
 import entity.enemy.boss.*;
 */
+import main.states.GameStateManager;
 import objects.entity.*;
 import objects.entity.enemy.*;
 import objects.entity.enemy.boss.*;
@@ -41,26 +42,19 @@ public class GamePanel extends JPanel implements Runnable {
     public final int worldHeight = tileSize * maxScrollRow;
     public final int worldFloorY = (worldHeight - tileSize*5);
 
-    final public int screenWidth = width;
-    final public int screenHeight = height;
-    
-
-
     private Thread thread;
     private boolean running = false;
-    
+
+    private GameStateManager gsm;
     private TileManager tileM = new TileManager(this);
     private CollisionDetector colDetect = new CollisionDetector(this);
     private SoundManager soundM;
     private MouseHandler mouse;
     private KeyHandler key;
 
-    private BufferedImage bg_img;
-
     public Player player;
     public ArrayList<Pawn> pawns = new ArrayList<Pawn>();
     public Boss boss;
-    private int level = 1;
 
     //Constructor
     public GamePanel(int width, int height){
@@ -79,6 +73,7 @@ public class GamePanel extends JPanel implements Runnable {
         mouse = new MouseHandler(this);
         key = new KeyHandler(this);
         soundM = SoundManager.getInstance();
+        gsm = new GameStateManager(this);
     }
 
     public void startGameThread(){
@@ -90,69 +85,42 @@ public class GamePanel extends JPanel implements Runnable {
     public void run() {
         init();
         double drawInterval = 1000000000/FPS;
-		double delta = 0;
-		long lastTime = System.nanoTime(), currentTime;
-        generateEntities();
+        double delta = 0;
+        long lastTime = System.nanoTime(), currentTime;
+        gsm.generateEntities();
         soundM.playClip("bgm", true);
-		while(running){
-			currentTime = System.nanoTime();
-			delta += (currentTime - lastTime)/drawInterval;
-			lastTime = currentTime;
-			//Delta method for frames per second
-			if(delta>=1){
-				update();// Update game entities
-				repaint();// redraws game entities based on new position
-				delta--;
-			}
-		}
-    }
-
-    public void generateEntities(){
-        player = new Player(this);
-        for(int i=0; i<6; i++){
-            //int pawnX = Utils.getRandom(13*tileSize, (maxScrollCol-7)*tileSize);
-            //pawns.add(new Pawn(this, pawnX));
-            pawns.add(new Pawn(this));
+        while(running){
+            currentTime = System.nanoTime();
+            delta += (currentTime - lastTime)/drawInterval;
+            lastTime = currentTime;
+            //Delta method for frames per second
+            if(delta>=1){
+                update();// Update game entities
+                repaint();// redraws game entities based on new position
+                delta--;
+            }
         }
-        boss = new Queen(this);
     }
 
     public void update(){
-        updateEntities();
-    }
-
-    public void updateEntities(){
-        player.update();
-        for(Pawn pawn:pawns){
-            pawn.update();
-        }
-        boss.update();
-    }
-
-    public void drawEntities(Graphics2D g2){
-        for(Pawn pawn:pawns){
-            pawn.draw(g2);
-        }
-        boss.draw(g2);
-        player.draw(g2);
+        gsm.update();
     }
 
     public void paintComponent(Graphics g){
-        super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
-
-        tileM.draw(g2);
-        
-        drawEntities(g2);
-
-        g2.dispose();
+        super.paintComponent(g);
+        gsm.paint(g2);
     }
 
-    public KeyHandler getKeyHandler(){
-        return key;
-    }
+    public ArrayList<Pawn> getPawns(){return pawns;}
 
-    public CollisionDetector getCollisionDet(){
-        return colDetect;
-    }
+    public KeyHandler getKeyHandler(){return key;}
+
+    public GameStateManager getGSM(){return gsm;}
+
+    public Player getPlayer(){return player; }
+
+    public CollisionDetector getCollisionDet(){return colDetect;}
+
+    public TileManager getTileManager(){return tileM;}
 }

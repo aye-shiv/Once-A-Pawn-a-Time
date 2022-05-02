@@ -22,8 +22,8 @@ public class Player extends Entity {
         this.worldX = gp.tileSize*1;
         this.worldY = gp.worldFloorY - height;
         this.screenX = worldX;
-        setSpeedX(5);
-        setSpeedY(5);
+        setSpeedX(6);
+        setSpeedY(6);
         this.hp = 100;
         this.maxHP = hp;
 

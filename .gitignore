@@ -1,5 +1,6 @@
 .gitignore
 .gitattributes
+*.iml
 
 # Compiled class file
 *.class
@@ -28,3 +29,4 @@ replay_pid*
 
 .idea/
 .vscode/
+
