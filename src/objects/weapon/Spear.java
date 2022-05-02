@@ -1,5 +1,6 @@
 package objects.weapon;
 
+import main.util.animation.Animation;
 import objects.entity.Entity;
 import main.GamePanel;
 
@@ -16,8 +17,8 @@ public class Spear extends Weapon {
 	}
 
     public void init(){
-        this.width = 65;
-        this.height = 75;
+        this.width = 155;
+        this.height = 35;
 
         this.worldX = entity.getWorldX();
         this.worldY = entity.getWorldY();
@@ -26,10 +27,19 @@ public class Spear extends Weapon {
         this.speed = 4;
 
         this.screenXOffset = ((int)(entity.getWidth() * 0.50));
-        this.screenYOffset = ((int)(entity.getHeight() * 0.25));
+        this.screenYOffset = ((int)(entity.getHeight() * 0.30));
 
-        this.image = ImageManager.loadBufferedImage("res/images/objects/spear.png");
+        this.image = ImageManager.loadBufferedImage("res/images/objects/spear/spear_1.png");
         this.soundManager = SoundManager.getInstance();
+        setupAnimation();
+    }
+
+    public void setupAnimation(){
+        animation = new Animation(gp, this);
+        animation.addFrame(image, 100); //First frame should be default image
+        animation.addFrame(ImageManager.loadBufferedImage("res/images/objects/spear/spear_1.png"), 100);
+        animation.addFrame(ImageManager.loadBufferedImage("res/images/objects/spear/spear_2.png"), 70);
+        animation.addFrame(ImageManager.loadBufferedImage("res/images/objects/spear/spear_3.png"), 100);
     }
 
     @Override

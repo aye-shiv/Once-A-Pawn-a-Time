@@ -18,12 +18,13 @@ public class Pawn extends Enemy {
 
     public void init() {
         this.width = 45;
-        this.height = 70;
+        this.height = 65;
 
         this.worldX = Utils.getRandom(13*gp.tileSize, (gp.maxScrollCol-7)*gp.tileSize);
         this.worldY = gp.worldFloorY - height;
 
-        setSpeedX(3);
+        setSpeedX(5);
+        setSpeedY(5);
 
         this.image = ImageManager.loadBufferedImage("res/images/entity/W_Pawn.png");
         this.soundManager = SoundManager.getInstance();
@@ -33,7 +34,7 @@ public class Pawn extends Enemy {
 
 
     public void update(){
-
+        super.update();
         this.weapon.update();
     }
 

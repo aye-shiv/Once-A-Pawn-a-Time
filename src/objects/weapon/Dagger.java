@@ -24,7 +24,7 @@ public class Dagger extends Weapon {
         this.screenXOffset = ((int)(entity.getWidth() * 0.50));
         this.screenYOffset = ((int)(entity.getHeight() * 0.45));
 
-        this.image = ImageManager.loadBufferedImage("res/images/objects/knife1.png");
+        this.image = ImageManager.loadBufferedImage("res/images/objects/dagger/dagger_1.png");
         this.soundManager = SoundManager.getInstance();
         setupAnimation();
     }

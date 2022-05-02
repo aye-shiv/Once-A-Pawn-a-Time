@@ -59,7 +59,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     public Player player;
     public ArrayList<Pawn> pawns = new ArrayList<Pawn>();
-    public Bishop boss;
+    public Boss boss;
     private int level = 1;
 
     //Constructor
@@ -114,7 +114,7 @@ public class GamePanel extends JPanel implements Runnable {
             //pawns.add(new Pawn(this, pawnX));
             pawns.add(new Pawn(this));
         }
-        boss = new Bishop(this);
+        boss = new Queen(this);
     }
 
     public void update(){

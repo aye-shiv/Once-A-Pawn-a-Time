@@ -8,6 +8,7 @@ import main.GamePanel;
 public class KeyHandler implements KeyListener {
 
     public boolean upPressed=false, downPressed=false, leftPressed=false, rightPressed=false;
+	public boolean spacePressed=false;
 
     public KeyHandler(GamePanel gp) {
         gp.addKeyListener(this);
@@ -32,6 +33,9 @@ public class KeyHandler implements KeyListener {
 		if (keyCode == KeyEvent.VK_D || keyCode == KeyEvent.VK_RIGHT){
 			rightPressed = true;
 		}
+		if (keyCode == KeyEvent.VK_SPACE){
+			spacePressed = true;
+		}
     }
 
     @Override
@@ -48,6 +52,9 @@ public class KeyHandler implements KeyListener {
 		}
 		if (keyCode == KeyEvent.VK_D || keyCode == KeyEvent.VK_RIGHT){
 			rightPressed = false;
+		}
+		if (keyCode == KeyEvent.VK_SPACE){
+			spacePressed = false;
 		}
     }
 }

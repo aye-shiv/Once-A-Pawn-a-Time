@@ -12,12 +12,12 @@ import java.util.List;
 
 public class Staff extends Weapon {
 
+    public List<Magic> projectiles = new ArrayList<>();
+
 	public Staff(GamePanel gp, Entity entity) {
 		super(gp, entity);
         init();
 	}
-
-    public List<Magic> projectiles = new ArrayList<>();
 
     public void init(){
 
@@ -30,7 +30,7 @@ public class Staff extends Weapon {
         this.screenXOffset = ((int)(entity.getWidth() * 0.25));
         this.screenYOffset = ((int)(entity.getHeight() * 0.15));
 
-        this.image = ImageManager.loadBufferedImage("res/images/objects/staff1.png");
+        this.image = ImageManager.loadBufferedImage("res/images/objects/staff/staff_1.png");
         this.soundManager = SoundManager.getInstance();
         setupAnimation();
     }
@@ -83,7 +83,7 @@ public class Staff extends Weapon {
         delayer.setDelayTime(1000);
         if(!delayer.inDelayPhase()){
             delayer.start();
-            Magic magic = new Magic(gp, entity);
+            Magic magic = new Magic(gp, entity, this);
             magic.startAnimation(true);
             projectiles.add(magic);
             resumeAnimation();
@@ -100,9 +100,16 @@ public class Staff extends Weapon {
 
     public static class Magic extends Weapon {
 
+        Weapon weapon;
+        int facing = -1;
+        public Magic(GamePanel gp, Entity entity, Weapon weapon) {
+            this(gp, entity);
+            this.weapon = weapon;
+            this.facing = entity.getFacing();
+            init();
+        }
         public Magic(GamePanel gp, Entity entity) {
             super(gp, entity);
-            init();
         }
 
         public void init(){
@@ -110,6 +117,9 @@ public class Staff extends Weapon {
             this.height = 15;
             this.hitDamage = 5;
             speedX = 10;
+
+            this.screenXOffset = weapon.getScreenXOffset() + ((int)(weapon.getWidth() * 0.75));
+            this.screenYOffset = weapon.getScreenYOffset() + ((int)(weapon.getHeight() * 0.01));
 
             worldX = entity.getWorldX();
             worldY = entity.getWorldY();
@@ -136,8 +146,12 @@ public class Staff extends Weapon {
 
         @Override
         public void update() {
-            worldX += speedX;
-            if(worldX > gp.worldWidth)
+            if(facing == Entity.FACING_LEFT)
+                worldX -= speedX;
+            else if(facing == Entity.FACING_RIGHT)
+                worldX += speedX;
+
+            if(worldX < 0 || worldX > gp.worldWidth)
                 isDestroyed = true;
 
             screenX = worldX - gp.player.getWorldX() + gp.player.getScreenX();

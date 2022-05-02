@@ -39,14 +39,35 @@ public abstract class Entity extends GameObject {
 
     public void setWeapon(Weapon weapon) { this.weapon = weapon; }
 
-
+    @Override
     public void moveLeft(){
         super.moveLeft();
         facing = Entity.FACING_LEFT;
     }
 
+    @Override
     public void moveRight(){
         super.moveRight();
         facing = Entity.FACING_RIGHT;
     }
+
+    @Override
+    public void update(){
+        if(isJumping && worldY >= getJumpHeight()){
+            moveUp();
+        } else { //Gravity
+            isJumping = false;
+            moveDown();
+        }
+    }
+
+    /* =====Jump Mechanics==== */
+    protected boolean isJumping = false;
+    public boolean isJumping(){ return isJumping; }
+    public boolean canJump() { return worldY == gp.worldFloorY - height;}
+    public void setJumping(boolean jumping){ this.isJumping = jumping; }
+    public int getJumpHeight(){
+        return gp.worldFloorY - height - gp.tileSize*2;
+    }
+
 }

@@ -46,7 +46,6 @@ public abstract class Weapon extends GameObject {
     public void setScreenXOffset(int screenXOffset) {
         this.screenXOffset = screenXOffset;
     }
-
     public void setScreenYOffset(int screenYOffset) {
         this.screenYOffset = screenYOffset;
     }

@@ -26,7 +26,7 @@ public class Sword extends Weapon {
         this.hitDamage = 2;
         this.speed = 4;
 
-        this.image = ImageManager.loadBufferedImage("res/images/objects/knife2.png");
+        this.image = ImageManager.loadBufferedImage("res/images/objects/sword/sword_1.png");
         this.soundManager = SoundManager.getInstance();
 
         setupAnimation();

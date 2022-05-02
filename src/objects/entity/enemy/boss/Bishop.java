@@ -16,26 +16,28 @@ public class Bishop extends Boss {
 	}
 
     public void init(){
-        this.width = 120;
-        this.height = 200;
+        this.width = 90;
+        this.height = 145;
 
         this.worldX = (gp.maxScrollCol-3) * gp.tileSize;
         this.worldY = gp.worldFloorY - height;
 
-        setSpeedX(14);
+        setSpeedX(13);
+        setSpeedY(5);
 
         this.image = ImageManager.loadBufferedImage("res/images/entity/W_Bishop.png");
         this.soundManager = SoundManager.getInstance();
 
         setWeapon(new Staff(gp, this));
-        this.weapon.setWidth(100);
-        this.weapon.setWidth(100);
-        this.weapon.setScreenXOffset(((int)(getWidth() * 0.51)));
-        this.weapon.setScreenYOffset(((int)(getHeight() * 0.35)));
+        this.weapon.setWidth(85);
+        this.weapon.setHeight(85);
+        this.weapon.setScreenXOffset(((int)(getWidth() * 0.35)));
+        this.weapon.setScreenYOffset(((int)(getHeight() * 0.15)));
     }
 
 	@Override
 	public void update(){
+        super.update();
         weapon.update();
     }
 
@@ -43,9 +45,6 @@ public class Bishop extends Boss {
     public void draw(Graphics2D g2){
         screenX = worldX - gp.player.getWorldX() + gp.player.getScreenX();
         screenY = worldY;
-        /*if(gp.player.getWorldX() > (gp.maxScrollCol-14)*gp.tileSize){
-            screenX = worldX - ((gp.maxScrollCol-15)*gp.tileSize);
-        }*/
 
         g2.drawImage(image, screenX, screenY, width, height, null);
         weapon.draw(g2);
