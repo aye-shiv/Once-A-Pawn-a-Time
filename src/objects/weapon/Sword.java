@@ -20,6 +20,7 @@ public class Sword extends Weapon {
         this.screenXOffset = ((int)(entity.getWidth() * 0.50));
         this.screenYOffset = ((int)(entity.getHeight() * 0.001));
 
+        this.name = "Sword";
         this.width = 75;
         this.height = 65;
 

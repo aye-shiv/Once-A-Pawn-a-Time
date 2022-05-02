@@ -27,7 +27,7 @@ public abstract class GameObject {
 
     protected Animation animation;
     protected Rectangle hitbox;
-    protected boolean collision = false;
+    public boolean collision = false;
 
     protected SoundManager soundManager;
     protected GamePanel gp;
@@ -88,7 +88,9 @@ public abstract class GameObject {
     public int getScreenX() { return screenX; }
     public int getScreenY() { return screenY; }
 
-    public Rectangle getHitBox(){return hitbox;}
+    public Rectangle getHitBox(){
+        return new Rectangle(worldX, worldY, width, height);
+    }
 
     public Animation getAnimation() { return animation; }
     public BufferedImage getImage() { return image; }

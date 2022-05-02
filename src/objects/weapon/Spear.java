@@ -17,6 +17,9 @@ public class Spear extends Weapon {
 	}
 
     public void init(){
+
+        this.name = "Spear";
+
         this.width = 155;
         this.height = 35;
 

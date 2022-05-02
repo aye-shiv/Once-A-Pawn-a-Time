@@ -30,18 +30,17 @@ public class Player extends Entity {
         this.image = ImageManager.loadBufferedImage("res/images/entity/B_Pawn.png");
         this.soundManager = SoundManager.getInstance();
 
-        //setWeapon(new Sword(gp, this));
+        setWeapon(new Sword(gp, this));
         //setWeapon(new Staff(gp, this));
         //setWeapon(new Dagger(gp, this));
         //setWeapon(new Spear(gp, this));
-        setWeapon(new Cannon(gp, this));
+        //setWeapon(new Cannon(gp, this));
     }
 
     @Override
     public void update(){
         super.update();
         this.move();
-        collision = false;
         this.weapon.update();
     }
 
@@ -58,7 +57,25 @@ public class Player extends Entity {
     }
 
     public void attack(){
-        this.weapon.attack();
+	    this.weapon.attack();
+	    switch(weapon.toString()){
+            case "Sword":
+                if(facing == FACING_RIGHT){
+                    for(Pawn pawn: gp.getPawns()){
+                        gp.getCollisionDet().checkHit(weapon, pawn);
+                        System.out.println("HI");
+                    }
+                    gp.getCollisionDet().checkHit(weapon, gp.boss);
+                }
+                break;
+            case "Staff":
+                break;
+            case "Spear":
+                break;
+            case "Cannon":
+                break;
+
+        }
     }
 
     public void move(){
@@ -81,6 +98,28 @@ public class Player extends Entity {
             moveRight();
             gp.boss.moveLeft();
         }
+
+        collision = false;
+        //gp.getCollisionDet().checkTile(this);
+
+        //Collision
+//        if(!collision){
+//            switch(facing){
+//                case 1:
+//                    if (gp.getKeyHandler().leftPressed){
+//                        moveLeft();
+//                        gp.boss.moveRight();
+//                    }
+//                    break;
+//
+//                case 2:
+//                    if (gp.getKeyHandler().rightPressed){
+//                        moveRight();
+//                        gp.boss.moveLeft();
+//                    }
+//                    break;
+//            }
+//        }
 
         if(gp.getKeyHandler().spacePressed){
             attack();

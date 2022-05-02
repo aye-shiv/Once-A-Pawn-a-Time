@@ -22,6 +22,9 @@ public class Cannon extends Weapon {
 	}
 
     public void init(){
+
+	    this.name = "Cannon";
+
         this.width = 70;
         this.height = 35;
 

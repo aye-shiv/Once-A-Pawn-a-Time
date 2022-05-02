@@ -21,6 +21,8 @@ public class Staff extends Weapon {
 
     public void init(){
 
+        this.name = "Staff";
+
         this.width = 55;
         this.height = 55;
 

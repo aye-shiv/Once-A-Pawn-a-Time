@@ -8,6 +8,7 @@ import main.GamePanel;
 import java.awt.*;
 
 public abstract class Weapon extends GameObject {
+    String name;
 
     public Weapon(GamePanel gp, Entity entity){
         super(gp);
@@ -49,6 +50,8 @@ public abstract class Weapon extends GameObject {
     public void setScreenYOffset(int screenYOffset) {
         this.screenYOffset = screenYOffset;
     }
+
+    public String toString() { return name; }
     //DAMAGE
     //Staff: 2
     //Spear: 4

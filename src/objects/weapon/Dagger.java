@@ -15,6 +15,9 @@ public class Dagger extends Weapon {
     }
 
     public void init(){
+
+        this.name = "Dagger";
+
         this.width = 79;
         this.height = 15;
 
