@@ -34,30 +34,34 @@ public class Spear extends Weapon {
 
     @Override
     public void draw(Graphics2D g2) {
-        screenX = entity.getScreenX() + screenXOffset;
-        screenY = entity.getScreenY() + screenYOffset;
-        if(isAnimating()){
+
+        if(isAnimating())
             animation.draw(g2);
-            return;
-        }
-        //g2.drawImage(image, screenX, screenY, width, height, null);
+
     }
 
     @Override
     public void update() {
-        if(isAnimating()){
-            animation.update();
-            return;
-        }
         if(entity.getFacing() == Entity.FACING_LEFT){
-            width = -width;
+            width = -Math.abs(width);
         } else if(entity.getFacing() == Entity.FACING_RIGHT){
             width = Math.abs(width);
         }
+
+        screenX = entity.getScreenX() + screenXOffset;
+        screenY = entity.getScreenY() + screenYOffset;
+
+        if(isAnimating())
+            animation.update();
+
     }
 
     @Override
     public void attack() {
-
+        delayer.setDelayTime(700);
+        if(!delayer.inDelayPhase()){
+            delayer.start();
+            resumeAnimation();
+        }
     }
 }

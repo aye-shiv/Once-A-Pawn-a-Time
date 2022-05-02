@@ -1,13 +1,10 @@
 package objects.weapon;
 
-import main.util.animation.Animation;
-import objects.GameObject;
-import objects.entity.Entity;
-import objects.entity.Player;
 import main.GamePanel;
-
 import main.util.ImageManager;
 import main.util.SoundManager;
+import main.util.animation.Animation;
+import objects.entity.Entity;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -48,30 +45,34 @@ public class Staff extends Weapon {
 
     @Override
     public void draw(Graphics2D g2) {
-        screenX = entity.getScreenX() + screenXOffset;
-        screenY = entity.getScreenY() + screenYOffset;
-        if(isAnimating()){
+
+        if(isAnimating())
             animation.draw(g2);
-            return;
-        }
-        for(Magic magic: projectiles){
+
+        projectiles.removeIf(projectile -> projectile.isDestroyed());
+        for(Magic magic: new ArrayList<>(projectiles)){
             magic.draw(g2);
         }
-        //g2.drawImage(image, screenX, screenY, width, height, null);
+
     }
 
     @Override
     public void update() {
-        if(isAnimating()){
-            animation.update();
-            return;
-        }
+
         if(entity.getFacing() == Entity.FACING_LEFT){
-            width = -width;
+            width = -Math.abs(width);
         } else if(entity.getFacing() == Entity.FACING_RIGHT){
             width = Math.abs(width);
         }
-        for(Magic magic: projectiles){
+
+        screenX = entity.getScreenX() + screenXOffset;
+        screenY = entity.getScreenY() + screenYOffset;
+
+        if(isAnimating())
+            animation.update();
+
+        projectiles.removeIf(projectile -> projectile.isDestroyed());
+        for(Magic magic: new ArrayList<>(projectiles)){
             magic.update();
         }
 
@@ -79,12 +80,20 @@ public class Staff extends Weapon {
 
     @Override
     public void attack() {
-        projectiles.add(new Magic(gp, entity));
+        delayer.setDelayTime(1000);
+        if(!delayer.inDelayPhase()){
+            delayer.start();
+            Magic magic = new Magic(gp, entity);
+            magic.startAnimation(true);
+            projectiles.add(magic);
+            resumeAnimation();
+        }
     }
 
 
     /*
     ==========================================
+
     ==========================================
      */
 
@@ -97,40 +106,48 @@ public class Staff extends Weapon {
         }
 
         public void init(){
-            this.width = 79;
+            this.width = 45;
             this.height = 15;
             this.hitDamage = 5;
-            speedX = 20;
+            speedX = 10;
 
-            this.screenXOffset = 0;
-            this.screenYOffset = 0;
+            worldX = entity.getWorldX();
+            worldY = entity.getWorldY();
 
-            screenX = entity.getScreenX() + screenXOffset;
-            screenY = entity.getScreenY() + screenYOffset;
+            this.image = ImageManager.loadBufferedImage("res/images/objects/staff/projectile/projectile_1.png");
+            setupAnimation();
+        }
 
-            this.image = ImageManager.loadBufferedImage("res/images/objects/knife1.png");
+        public void setupAnimation(){
+            animation = new Animation(gp, this);
+            animation.addFrame(image, 100); //First frame should be default image
+            animation.addFrame(ImageManager.loadBufferedImage("res/images/objects/staff/projectile/projectile_1.png"), 100);
+            animation.addFrame(ImageManager.loadBufferedImage("res/images/objects/staff/projectile/projectile_2.png"), 100);
+            animation.addFrame(ImageManager.loadBufferedImage("res/images/objects/staff/projectile/projectile_3.png"), 100);
+            animation.addFrame(ImageManager.loadBufferedImage("res/images/objects/staff/projectile/projectile_4.png"), 100);
         }
 
         @Override
         public void draw(Graphics2D g2) {
-            //screenX = entity.getScreenX() + screenXOffset;
-            //screenY = entity.getScreenY() + screenYOffset;
-            if(isAnimating()){
+
+            if(isAnimating())
                 animation.draw(g2);
-                return;
-            }
-            g2.drawImage(image, screenX, screenY, width, height, null);
         }
 
         @Override
         public void update() {
-            screenX += speedX;
+            worldX += speedX;
+            if(worldX > gp.worldWidth)
+                isDestroyed = true;
+
+            screenX = worldX - gp.player.getWorldX() + gp.player.getScreenX();
+            screenY = worldY;
+            if(isAnimating())
+                animation.update();
         }
 
-        @Override
-        public void attack() {
+        @Override public void attack() {}
 
-        }
     }
 
 }

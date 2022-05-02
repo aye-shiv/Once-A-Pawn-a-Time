@@ -1,12 +1,16 @@
 package objects;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 
 import main.GamePanel;
 import main.util.animation.Animation;
 import main.util.SoundManager;
 import objects.entity.Entity;
+
+import javax.swing.*;
 
 public abstract class GameObject {
 
@@ -29,11 +33,12 @@ public abstract class GameObject {
     protected GamePanel gp;
     protected BufferedImage image;
 
+    protected Delay delayer = new Delay();
 
     /* =====Functions to Override==== */
-
     public abstract void draw(Graphics2D g2);
     public abstract void update();
+    //public abstract void destroy();
 
     /* =====Animations==== */
     private boolean noAnimation() {
@@ -54,7 +59,7 @@ public abstract class GameObject {
     public void startAnimation(boolean loop){
         if(noAnimation())
             return;
-        animation.startAnimation();
+        animation.startAnimation(loop);
     }
 
     public void resumeAnimation(){
@@ -120,5 +125,10 @@ public abstract class GameObject {
         if(worldX+speedX <= (gp.worldWidth - gp.tileSize*2) + width)
             worldX += speedX;
     }
+
+
+    /* =====Checks==== */
+    protected boolean isDestroyed = false;
+    public boolean isDestroyed(){ return isDestroyed; }
 
 }

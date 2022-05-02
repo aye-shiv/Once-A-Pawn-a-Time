@@ -9,7 +9,7 @@ import objects.weapon.Spear;
 import objects.weapon.Staff;
 import objects.weapon.Sword;
 
-import java.awt.Graphics2D;
+import java.awt.*;
 
 public class Player extends Entity {
 
@@ -33,8 +33,8 @@ public class Player extends Entity {
         this.image = ImageManager.loadBufferedImage("res/images/entity/B_Pawn.png");
         this.soundManager = SoundManager.getInstance();
 
-        //setWeapon(new Sword(gp, this));
-        setWeapon(new Staff(gp, this));
+        setWeapon(new Sword(gp, this));
+        //setWeapon(new Staff(gp, this));
         //setWeapon(new Dagger(gp, this));
         //setWeapon(new Spear(gp, this));
     }
@@ -66,16 +66,16 @@ public class Player extends Entity {
         if (gp.getKeyHandler().upPressed){
             moveUp();
             gp.boss.moveUp();
-            attack();
         }
         if (gp.getKeyHandler().downPressed){
             moveDown();
             gp.boss.moveDown();
-            gp.boss.weapon.resumeAnimation();
+            attack();
+
+            gp.boss.weapon.attack();
             for(Pawn pawn: gp.pawns){
-                pawn.weapon.resumeAnimation();
+                pawn.weapon.attack();
             }
-            weapon.resumeAnimation();
         }
 
         if (gp.getKeyHandler().leftPressed){
