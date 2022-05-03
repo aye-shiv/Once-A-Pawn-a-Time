@@ -4,6 +4,8 @@ import main.GamePanel;
 import objects.GameObject;
 import objects.weapon.Weapon;
 
+import java.awt.*;
+
 public abstract class Entity extends GameObject {
 
     public static int FACING_LEFT = 1;
@@ -17,6 +19,8 @@ public abstract class Entity extends GameObject {
     protected Weapon weapon;
     protected int maxHP = 0, hp = 0;
     protected int facing = FACING_RIGHT;
+    protected int idleCounter = 0;
+    protected int actionBufCounter = 0;
 
 
     /* =====Custom==== */
@@ -44,6 +48,7 @@ public abstract class Entity extends GameObject {
 
     public Weapon getWeapon() { return weapon; }
     public int getFacing() { return facing; }
+    public int getABC(){ return actionBufCounter;}
     /* =====Setters==== */
 
     public void setWeapon(Weapon weapon) { this.weapon = weapon; }
@@ -69,6 +74,18 @@ public abstract class Entity extends GameObject {
             isJumping = false;
             moveDown();
         }
+    }
+
+    public void drawHP(Graphics2D g2){
+
+        double hpBar = ((double)gp.tileSize/maxHP) * hp;
+
+        g2.setColor(new Color(35, 35, 35));
+        g2.fillRect(screenX-1, screenY-16, gp.tileSize+2, 12);
+
+        g2.setColor(new Color(255,0,30));
+        g2.fillRect(screenX, screenY -15, (int)hpBar, 10);
+
     }
 
     /* =====Jump Mechanics==== */

@@ -3,12 +3,14 @@ package objects.entity.enemy.boss;
 import main.GamePanel;
 import main.util.ImageManager;
 import main.util.SoundManager;
+import main.util.Utils;
+
 import objects.weapon.Cannon;
 
 import java.awt.*;
 
 public class Rook extends Boss {
-
+    private static final int ABC = 90;
 	public Rook(GamePanel gp) {
 		super(gp);
         init();
@@ -36,10 +38,46 @@ public class Rook extends Boss {
         this.weapon.setScreenYOffset(((int)(getHeight() * 0.55)));
     }
 
+    public void setAction(){
+        int i = Utils.getRandom(1,50);
+
+        actionBufCounter++;
+        int temp = actionBufCounter;
+        if (gp.getPlayer().getWorldX() < worldX && (worldX - gp.getPlayer().getWorldX()) < 500) {
+            i = 1;
+            actionBufCounter = ABC;
+        }
+
+        if (gp.getPlayer().getWorldX() > worldX && (gp.getPlayer().getWorldX() - Math.abs(worldX)) > 40) {
+            i = 26;
+            actionBufCounter = ABC;
+        }
+
+        if ((worldX - gp.getPlayer().getWorldX()) < 600 || (gp.getPlayer().getWorldX() - Math.abs(worldX)) > 600) {
+            i = 51;
+            actionBufCounter = temp;
+        }
+        if(actionBufCounter==ABC) {
+
+            if (i < 25) {
+                moveLeft();
+            } else if (i > 25 && i < 50) {
+                moveRight();
+                facing = FACING_LEFT;
+            } else if (i > 50 && i < 75) {
+                weapon.attack();
+            }
+            //else if (i > 75 && i < 100) {}
+
+            actionBufCounter = 0;
+        }
+    }
+
     @Override
     public void update() {
         super.update();
         this.weapon.update();
+        setAction();
     }
 
     @Override
@@ -50,6 +88,7 @@ public class Rook extends Boss {
 
         g2.drawImage(image, screenX, screenY, width, height, null);
         weapon.draw(g2);
+        drawHP(g2);
     }
 
 

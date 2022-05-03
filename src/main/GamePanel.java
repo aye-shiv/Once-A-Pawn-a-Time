@@ -116,6 +116,8 @@ public class GamePanel extends JPanel implements Runnable {
 
     public KeyHandler getKeyHandler(){return key;}
 
+    public MouseHandler getMouseHandler(){return mouse;}
+
     public GameStateManager getGSM(){return gsm;}
 
     public Player getPlayer(){return player; }

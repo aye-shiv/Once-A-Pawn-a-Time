@@ -4,6 +4,9 @@ import main.GamePanel;
 import main.ui.UI;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
+
+import main.util.ImageManager;
 import objects.entity.Player;
 import objects.entity.enemy.Pawn;
 import objects.entity.enemy.boss.Bishop;
@@ -44,6 +47,7 @@ public class GameStateManager {
         if(gp.getPlayer().isDestroyed()){
             currentState = GAMEOVER;
         }
+        ui.update();
 
         switch(currentState){
             case PLAY:
@@ -86,24 +90,37 @@ public class GameStateManager {
         for(int i=0; i<6; i++){
             gp.getPawns().add(new Pawn(gp));
         }
+        if(gp.getPawns().size()>0) gp.getPawns().clear();
         switch(level){
             case 1:
                 gp.boss = new Knight(gp);
+                for(int i=0; i<6; i++){
+                    gp.getPawns().add(new Pawn(gp));
+                }
                 gp.player.setWeapon(new Sword(gp, gp.player));
                 gp.player.takeHealth(gp.player.getMaxHP());
                 break;
             case 2:
                 gp.boss = new Bishop(gp);
+                for(int i=0; i<6; i++){
+                    gp.getPawns().add(new Pawn(gp));
+                }
                 gp.player.setWeapon(new Spear(gp, gp.player));
                 gp.player.takeHealth(gp.player.getMaxHP());
                 break;
             case 3:
                 gp.boss = new Rook(gp);
+                for(int i=0; i<6; i++){
+                    gp.getPawns().add(new Pawn(gp));
+                }
                 gp.player.setWeapon(new Staff(gp, gp.player));
                 gp.player.takeHealth(gp.player.getMaxHP());
                 break;
             case 4:
                 gp.boss = new Queen(gp);
+                for(int i=0; i<6; i++){
+                    gp.getPawns().add(new Pawn(gp));
+                }
                 gp.player.setWeapon(new Cannon(gp, gp.player));
                 gp.player.takeHealth(gp.player.getMaxHP());
                 break;
@@ -133,6 +150,8 @@ public class GameStateManager {
         ui.draw(g2);
         g2.dispose();
     }
+
+    public boolean getLevelStatus(){return increaseLevel;}
 
     public int getCurrentState(){return currentState;}
 

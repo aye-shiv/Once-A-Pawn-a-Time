@@ -60,92 +60,21 @@ public class Player extends Entity {
         if (gp.getKeyHandler().upPressed){
             if(canJump()){ //On the ground
                 isJumping = true;
-                gp.boss.setJumping(true);
             }
         }
         if (gp.getKeyHandler().downPressed){
             isJumping = false;
-            gp.boss.setJumping(false);
         }
 
         if (gp.getKeyHandler().leftPressed){
             moveLeft();
-            gp.boss.moveRight();
         }
         if (gp.getKeyHandler().rightPressed){
             moveRight();
-            gp.boss.moveLeft();
         }
 
         if(gp.getKeyHandler().spacePressed){
             attack();
-
-            gp.boss.weapon.attack();
-            for(Pawn pawn: gp.pawns){
-                pawn.weapon.attack();
-            }
         }
     }
-
-    /*
-    public void setCollision(){
-        weapon.collision = new Runnable() {
-            @Override
-            public void run() {
-                if(collidingObject instanceof Pawn){
-                    System.out.println("You hit a pawn");
-                    collidingObject = null;
-                } else if(collidingObject instanceof Boss) {
-                    System.out.println("You hit a Boss");
-                    collidingObject = null;
-                }
-            }
-        };
-    }
-    */
-
-    /*
-    Runnable collision = new Runnable() {
-        @Override
-        public void run() {
-
-            if(weapon instanceof Sword || weapon instanceof Spear){
-                for(Pawn pawn: gp.getPawns()){
-                    if(CollisionDetector.isColliding(weapon, pawn)){
-                        System.out.println("I hit a pawn");
-                    }
-                }
-                if(CollisionDetector.isColliding(weapon, gp.boss)){
-                    System.out.println("I hit the boss");
-                }
-            } else if(weapon instanceof Staff){ //Special these have projectiles
-                Staff staff = (Staff) weapon;
-                for(Staff.Magic magic: new ArrayList<>(staff.projectiles)){
-                    if(CollisionDetector.isColliding(magic, gp.boss)){
-                        System.out.println("Boss should take damage");
-                        magic.destroy();
-                        continue;
-                    }
-
-                    for(Pawn pawn: new ArrayList<>(gp.getPawns())){
-                        if(CollisionDetector.isColliding(magic, pawn)){
-                            System.out.println("Pawn should take damage");
-                            magic.destroy();
-                            break;
-                        }
-                    }
-                }
-            } else if(weapon instanceof Cannon){
-
-            }
-
-            if(weapon instanceof Staff || weapon instanceof Cannon){
-
-                return;
-            }
-
-        }
-    };
-    */
-
 }
