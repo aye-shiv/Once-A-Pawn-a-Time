@@ -22,9 +22,18 @@ public abstract class Entity extends GameObject {
     /* =====Custom==== */
     public void takeHealth(int health){
         hp += health;
+        if(hp > maxHP){
+            hp = maxHP;
+        }
     }
+
     public void takeDamage(int damage) {
         hp -= damage;
+        if(hp <= 0){
+            hp = 0;
+            destroy();
+        }
+
     }
 
 
@@ -53,6 +62,7 @@ public abstract class Entity extends GameObject {
 
     @Override
     public void update(){
+        super.update();
         if(isJumping && worldY >= getJumpHeight()){
             moveUp();
         } else { //Gravity

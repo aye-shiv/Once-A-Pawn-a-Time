@@ -21,8 +21,10 @@ public class Knight extends Boss {
         this.worldX = (gp.maxScrollCol-3) * gp.tileSize;
         this.worldY = gp.worldFloorY - height;
 
-        setSpeedX(13);
-        setSpeedY(5);
+        setSpeedX(8);
+        setSpeedY(7);
+        this.hp = 200;
+        this.maxHP = hp;
 
         this.image = ImageManager.loadBufferedImage("res/images/entity/W_Knight.png");
         this.soundManager = SoundManager.getInstance();
@@ -42,6 +44,7 @@ public class Knight extends Boss {
 
     @Override
     public void draw(Graphics2D g2) {
+        super.draw(g2);
         screenX = worldX - gp.player.getWorldX() + gp.player.getScreenX();
         screenY = worldY;
 

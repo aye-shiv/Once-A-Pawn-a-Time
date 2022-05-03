@@ -1,12 +1,11 @@
 package objects.entity.enemy.boss;
 
-import java.awt.Graphics2D;
-
 import main.GamePanel;
 import main.util.ImageManager;
 import main.util.SoundManager;
 import objects.weapon.Cannon;
-import objects.weapon.Staff;
+
+import java.awt.*;
 
 public class Rook extends Boss {
 
@@ -22,8 +21,10 @@ public class Rook extends Boss {
         this.worldX = (gp.maxScrollCol-3) * gp.tileSize;
         this.worldY = gp.worldFloorY - height;
 
-        setSpeedX(18);
-        setSpeedY(5);
+        setSpeedX(12);
+        setSpeedY(8);
+        this.hp = 500;
+        this.maxHP = hp;
 
         this.image = ImageManager.loadBufferedImage("res/images/entity/W_Rook.png");
         this.soundManager = SoundManager.getInstance();
@@ -43,6 +44,7 @@ public class Rook extends Boss {
 
     @Override
     public void draw(Graphics2D g2) {
+        super.draw(g2);
         screenX = worldX - gp.player.getWorldX() + gp.player.getScreenX();
         screenY = worldY;
 

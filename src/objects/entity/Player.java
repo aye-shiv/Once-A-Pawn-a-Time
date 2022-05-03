@@ -4,7 +4,7 @@ import main.GamePanel;
 import main.util.ImageManager;
 import main.util.SoundManager;
 import objects.entity.enemy.Pawn;
-import objects.weapon.*;
+import objects.weapon.Sword;
 
 import java.awt.*;
 
@@ -30,25 +30,20 @@ public class Player extends Entity {
         this.image = ImageManager.loadBufferedImage("res/images/entity/B_Pawn.png");
         this.soundManager = SoundManager.getInstance();
 
-        //setWeapon(new Sword(gp, this));
-        //setWeapon(new Staff(gp, this));
-        //setWeapon(new Dagger(gp, this));
-        setWeapon(new Spear(gp, this));
-        //setWeapon(new Cannon(gp, this));
+        setWeapon(new Sword(gp, this));
     }
 
     @Override
     public void update(){
         super.update();
         this.move();
-        collision = false;
         this.weapon.update();
     }
 
 
     @Override
     public void draw(Graphics2D g2){
-
+        super.draw(g2);
         screenY = worldY;
         if(gp.player.getWorldX() > (gp.maxScrollCol-14)*gp.tileSize){
             screenX = worldX - ((gp.maxScrollCol-15)*gp.tileSize);
@@ -58,7 +53,7 @@ public class Player extends Entity {
     }
 
     public void attack(){
-        this.weapon.attack();
+	    this.weapon.attack();
     }
 
     public void move(){
@@ -91,5 +86,66 @@ public class Player extends Entity {
             }
         }
     }
-    
+
+    /*
+    public void setCollision(){
+        weapon.collision = new Runnable() {
+            @Override
+            public void run() {
+                if(collidingObject instanceof Pawn){
+                    System.out.println("You hit a pawn");
+                    collidingObject = null;
+                } else if(collidingObject instanceof Boss) {
+                    System.out.println("You hit a Boss");
+                    collidingObject = null;
+                }
+            }
+        };
+    }
+    */
+
+    /*
+    Runnable collision = new Runnable() {
+        @Override
+        public void run() {
+
+            if(weapon instanceof Sword || weapon instanceof Spear){
+                for(Pawn pawn: gp.getPawns()){
+                    if(CollisionDetector.isColliding(weapon, pawn)){
+                        System.out.println("I hit a pawn");
+                    }
+                }
+                if(CollisionDetector.isColliding(weapon, gp.boss)){
+                    System.out.println("I hit the boss");
+                }
+            } else if(weapon instanceof Staff){ //Special these have projectiles
+                Staff staff = (Staff) weapon;
+                for(Staff.Magic magic: new ArrayList<>(staff.projectiles)){
+                    if(CollisionDetector.isColliding(magic, gp.boss)){
+                        System.out.println("Boss should take damage");
+                        magic.destroy();
+                        continue;
+                    }
+
+                    for(Pawn pawn: new ArrayList<>(gp.getPawns())){
+                        if(CollisionDetector.isColliding(magic, pawn)){
+                            System.out.println("Pawn should take damage");
+                            magic.destroy();
+                            break;
+                        }
+                    }
+                }
+            } else if(weapon instanceof Cannon){
+
+            }
+
+            if(weapon instanceof Staff || weapon instanceof Cannon){
+
+                return;
+            }
+
+        }
+    };
+    */
+
 }

@@ -7,6 +7,7 @@ import main.GamePanel;
 
 import main.util.ImageManager;
 import main.util.SoundManager;
+import objects.entity.enemy.Enemy;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -22,11 +23,11 @@ public class Cannon extends Weapon {
 	}
 
     public void init(){
+
+	    this.name = "Cannon";
+
         this.width = 70;
         this.height = 35;
-
-        this.hitDamage = 20;
-        this.speed = 7;
 
         this.screenXOffset = ((int)(entity.getWidth() * 0.35));
         this.screenYOffset = ((int)(entity.getHeight() * 0.25));
@@ -34,6 +35,7 @@ public class Cannon extends Weapon {
         this.image = ImageManager.loadBufferedImage("res/images/objects/cannon/cannon_1.png");
         this.soundManager = SoundManager.getInstance();
         setupAnimation();
+        this.collision = () -> { };
     }
 
     public void setupAnimation(){
@@ -46,7 +48,7 @@ public class Cannon extends Weapon {
 
     @Override
     public void draw(Graphics2D g2) {
-
+        super.draw(g2);
         if(isAnimating())
             animation.draw(g2);
 
@@ -58,6 +60,7 @@ public class Cannon extends Weapon {
 
     @Override
     public void update() {
+        super.update();
         if(entity.getFacing() == Entity.FACING_LEFT){
             width = -Math.abs(width);
         } else if(entity.getFacing() == Entity.FACING_RIGHT){
@@ -88,6 +91,10 @@ public class Cannon extends Weapon {
         }
     }
 
+    @Override
+    public Rectangle getHitBox(){ //Projectile weapon doesn't have a hitbox
+        return new Rectangle(screenX, screenY, 0, 0);
+    }
 
 
     /*
@@ -113,9 +120,10 @@ public class Cannon extends Weapon {
         }
 
         public void init() {
+            this.name = "CannonBall";
             this.width = 25;
             this.height = 25;
-            this.hitDamage = 5;
+            this.hitDamage = 15;
             speedX = 10;
 
             this.screenXOffset = weapon.getScreenXOffset() + ((int)(weapon.getWidth() * 0.25));
@@ -126,6 +134,7 @@ public class Cannon extends Weapon {
 
             this.image = ImageManager.loadBufferedImage("res/images/objects/cannon/projectile/cannon_ball.png");
             setupAnimation();
+            this.collision = projectileCollision;
         }
 
         public void setupAnimation() {
@@ -136,7 +145,7 @@ public class Cannon extends Weapon {
 
         @Override
         public void draw(Graphics2D g2) {
-
+            super.draw(g2);
             if(isAnimating())
                 animation.draw(g2);
 
@@ -144,6 +153,7 @@ public class Cannon extends Weapon {
 
         @Override
         public void update() {
+            super.update();
             if(facing == Entity.FACING_LEFT)
                 worldX -= speedX;
             else if(facing == Entity.FACING_RIGHT)
@@ -161,6 +171,25 @@ public class Cannon extends Weapon {
         @Override
         public void attack() { }
 
+        Runnable projectileCollision = () -> {
+            if(entity instanceof Player){
+                if(collidingObject instanceof Enemy){
+                    System.out.println("[" + name +"] Player hit a enemy");
+                    Enemy enemy = (Enemy) collidingObject;
+                    enemy.takeDamage(hitDamage);
+                    this.destroy();
+                    collidingObject = null;
+                }
+            } else if(entity instanceof Enemy){
+                if(collidingObject instanceof Player){
+                    System.out.println("[" + name +"] Enemy hit a player");
+                    Player player = (Player) collidingObject;
+                    player.takeDamage(hitDamage);
+                    this.destroy();
+                    collidingObject = null;
+                }
+            }
+        };
     }
 
 }

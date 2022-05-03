@@ -5,6 +5,10 @@ import main.util.ImageManager;
 import main.util.SoundManager;
 import main.util.animation.Animation;
 import objects.entity.Entity;
+import objects.entity.Player;
+import objects.entity.enemy.Enemy;
+import objects.entity.enemy.Pawn;
+import objects.entity.enemy.boss.Boss;
 
 import java.awt.*;
 
@@ -15,11 +19,13 @@ public class Dagger extends Weapon {
     }
 
     public void init(){
+
+        this.name = "Dagger";
+
         this.width = 79;
         this.height = 15;
 
         this.hitDamage = 5;
-        this.speed = 4;
 
         this.screenXOffset = ((int)(entity.getWidth() * 0.50));
         this.screenYOffset = ((int)(entity.getHeight() * 0.45));
@@ -39,15 +45,14 @@ public class Dagger extends Weapon {
 
     @Override
     public void draw(Graphics2D g2) {
-
+        super.draw(g2);
         if(isAnimating())
             animation.draw(g2);
-
     }
 
     @Override
     public void update() {
-
+        super.update();
         if(entity.getFacing() == Entity.FACING_LEFT){
             width = -Math.abs(width);
         } else if(entity.getFacing() == Entity.FACING_RIGHT){
@@ -70,5 +75,6 @@ public class Dagger extends Weapon {
             resumeAnimation();
         }
     }
+
 
 }

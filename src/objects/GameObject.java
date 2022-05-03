@@ -1,16 +1,17 @@
 package objects;
 
+import main.GamePanel;
+import main.util.CollisionDetector;
+import main.util.SoundManager;
+import main.util.animation.Animation;
+import objects.entity.enemy.Pawn;
+
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
-
-import main.GamePanel;
-import main.util.animation.Animation;
-import main.util.SoundManager;
-import objects.entity.Entity;
-
-import javax.swing.*;
+import java.util.ArrayList;
 
 public abstract class GameObject {
 
@@ -26,8 +27,6 @@ public abstract class GameObject {
     protected int height = 0;
 
     protected Animation animation;
-    protected Rectangle hitbox;
-    protected boolean collision = false;
 
     protected SoundManager soundManager;
     protected GamePanel gp;
@@ -36,9 +35,25 @@ public abstract class GameObject {
     protected Delay delayer = new Delay();
 
     /* =====Functions to Override==== */
-    public abstract void draw(Graphics2D g2);
-    public abstract void update();
-    //public abstract void destroy();
+
+    public void draw(Graphics2D g2){
+        if(false) { //Show hitbox
+            Rectangle rect = getHitBox();
+            g2.setColor(Color.RED);
+            g2.drawRect(rect.x, rect.y, rect.width, rect.height);
+        }
+    }
+
+    public void update(){
+        if(isAnimating())
+            checkColliding();
+        if(collidingObject != null && !inCollisionDelayPhase)
+            onCollision();
+    }
+
+    public void destroy(){
+        isDestroyed = true;
+    }
 
     /* =====Animations==== */
     private boolean noAnimation() {
@@ -88,7 +103,11 @@ public abstract class GameObject {
     public int getScreenX() { return screenX; }
     public int getScreenY() { return screenY; }
 
-    public Rectangle getHitBox(){return hitbox;}
+    public Rectangle getHitBox(){
+        if(width < 0) //Facing Left
+            return new Rectangle(screenX-Math.abs(width), screenY, Math.abs(width), Math.abs(height));
+        return new Rectangle(screenX, screenY, Math.abs(width), Math.abs(height));
+    }
 
     public Animation getAnimation() { return animation; }
     public BufferedImage getImage() { return image; }
@@ -130,5 +149,36 @@ public abstract class GameObject {
     /* =====Checks==== */
     protected boolean isDestroyed = false;
     public boolean isDestroyed(){ return isDestroyed; }
+
+
+    /* =====Colliding==== */
+    protected Object collidingObject = null;
+    protected Runnable collision = () -> {
+        //Let each entity that uses a weapon override this method
+        //This needs to be overridden
+    };
+
+    private void onCollision(){
+        collision.run();
+    }
+
+    protected void checkColliding(){
+
+    }
+
+    private boolean inCollisionDelayPhase = false;
+    protected Timer collisionDelay = new Timer(0, new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            inCollisionDelayPhase = false;
+        }
+    });
+
+    public void startCollisionDelay(int time){
+        collisionDelay.setInitialDelay(time);
+        collisionDelay.setDelay(time);
+        inCollisionDelayPhase = true;
+        collisionDelay.restart();
+    }
 
 }

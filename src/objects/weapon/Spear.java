@@ -6,6 +6,8 @@ import main.GamePanel;
 
 import main.util.ImageManager;
 import main.util.SoundManager;
+import objects.entity.Player;
+import objects.entity.enemy.Enemy;
 
 import java.awt.*;
 
@@ -17,20 +19,23 @@ public class Spear extends Weapon {
 	}
 
     public void init(){
+
+        this.name = "Spear";
+
         this.width = 155;
         this.height = 35;
 
         this.worldX = entity.getWorldX();
         this.worldY = entity.getWorldY();
 
-        this.hitDamage = 7;
-        this.speed = 4;
+        this.hitDamage = 9;
 
         this.screenXOffset = ((int)(entity.getWidth() * 0.50));
         this.screenYOffset = ((int)(entity.getHeight() * 0.30));
 
         this.image = ImageManager.loadBufferedImage("res/images/objects/spear/spear_1.png");
         this.soundManager = SoundManager.getInstance();
+
         setupAnimation();
     }
 
@@ -44,7 +49,7 @@ public class Spear extends Weapon {
 
     @Override
     public void draw(Graphics2D g2) {
-
+        super.draw(g2);
         if(isAnimating())
             animation.draw(g2);
 
@@ -52,6 +57,7 @@ public class Spear extends Weapon {
 
     @Override
     public void update() {
+        super.update();
         if(entity.getFacing() == Entity.FACING_LEFT){
             width = -Math.abs(width);
         } else if(entity.getFacing() == Entity.FACING_RIGHT){
@@ -74,4 +80,6 @@ public class Spear extends Weapon {
             resumeAnimation();
         }
     }
+
+
 }

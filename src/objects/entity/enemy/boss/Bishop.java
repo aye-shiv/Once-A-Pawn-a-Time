@@ -1,12 +1,11 @@
 package objects.entity.enemy.boss;
 
-import java.awt.Graphics2D;
-
 import main.GamePanel;
 import main.util.ImageManager;
 import main.util.SoundManager;
 import objects.weapon.Staff;
-import objects.weapon.Sword;
+
+import java.awt.*;
 
 public class Bishop extends Boss {
 
@@ -22,16 +21,18 @@ public class Bishop extends Boss {
         this.worldX = (gp.maxScrollCol-3) * gp.tileSize;
         this.worldY = gp.worldFloorY - height;
 
-        setSpeedX(13);
-        setSpeedY(5);
+        setSpeedX(8);
+        setSpeedY(7);
+        this.hp = 250;
+        this.maxHP = hp;
 
         this.image = ImageManager.loadBufferedImage("res/images/entity/W_Bishop.png");
         this.soundManager = SoundManager.getInstance();
 
         setWeapon(new Staff(gp, this));
-        this.weapon.setWidth(85);
+        this.weapon.setWidth(105);
         this.weapon.setHeight(85);
-        this.weapon.setScreenXOffset(((int)(getWidth() * 0.35)));
+        this.weapon.setScreenXOffset(((int)(getWidth() * 0.55)));
         this.weapon.setScreenYOffset(((int)(getHeight() * 0.15)));
     }
 
@@ -43,6 +44,7 @@ public class Bishop extends Boss {
 
     @Override
     public void draw(Graphics2D g2){
+        super.draw(g2);
         screenX = worldX - gp.player.getWorldX() + gp.player.getScreenX();
         screenY = worldY;
 

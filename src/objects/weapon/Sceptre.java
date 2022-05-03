@@ -1,47 +1,49 @@
 package objects.weapon;
 
-import main.util.animation.Animation;
-import objects.entity.Entity;
 import main.GamePanel;
-
 import main.util.ImageManager;
 import main.util.SoundManager;
+import main.util.animation.Animation;
+import objects.entity.Entity;
 import objects.entity.Player;
 import objects.entity.enemy.Enemy;
-import objects.entity.enemy.Pawn;
-import objects.entity.enemy.boss.Boss;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
-public class Sword extends Weapon {
+public class Sceptre extends Weapon {
 
-	public Sword(GamePanel gp, Entity entity) {
+	public Sceptre(GamePanel gp, Entity entity) {
 		super(gp, entity);
         init();
 	}
 
     public void init(){
-        this.screenXOffset = ((int)(entity.getWidth() * 0.50));
-        this.screenYOffset = ((int)(entity.getHeight() * 0.001));
 
-        this.name = "Sword";
-        this.width = 75;
+        this.name = "Sceptre";
+
+        this.width = 85;
         this.height = 65;
 
-        this.hitDamage = 6;
+        this.hitDamage = 20;
 
-        this.image = ImageManager.loadBufferedImage("res/images/objects/sword/sword_1.png");
+        this.screenXOffset = ((int)(entity.getWidth() * 0.02));
+        this.screenYOffset = ((int)(entity.getHeight() * 0.02));
+
+        this.image = ImageManager.loadBufferedImage("res/images/objects/sceptre/sceptre_1.png");
         this.soundManager = SoundManager.getInstance();
-
         setupAnimation();
     }
 
     public void setupAnimation(){
         animation = new Animation(gp, this);
         animation.addFrame(image, 100); //First frame should be default image
-        animation.addFrame(ImageManager.loadBufferedImage("res/images/objects/sword/sword_1.png"), 100);
-        animation.addFrame(ImageManager.loadBufferedImage("res/images/objects/sword/sword_2.png"), 70);
-        animation.addFrame(ImageManager.loadBufferedImage("res/images/objects/sword/sword_3.png"), 100);
+        animation.addFrame(ImageManager.loadBufferedImage("res/images/objects/sceptre/sceptre_1.png"), 100);
+        animation.addFrame(ImageManager.loadBufferedImage("res/images/objects/sceptre/sceptre_2.png"), 50);
+        animation.addFrame(ImageManager.loadBufferedImage("res/images/objects/sceptre/sceptre_3.png"), 100);
+        animation.addFrame(ImageManager.loadBufferedImage("res/images/objects/sceptre/sceptre_4.png"), 50);
+        animation.addFrame(ImageManager.loadBufferedImage("res/images/objects/sceptre/sceptre_5.png"), 100);
     }
 
     @Override
@@ -49,6 +51,7 @@ public class Sword extends Weapon {
         super.draw(g2);
         if(isAnimating())
             animation.draw(g2);
+
     }
 
     @Override
@@ -65,6 +68,7 @@ public class Sword extends Weapon {
 
         if(isAnimating())
             animation.update();
+
     }
 
     @Override

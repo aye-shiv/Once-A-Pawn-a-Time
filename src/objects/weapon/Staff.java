@@ -1,10 +1,16 @@
 package objects.weapon;
 
 import main.GamePanel;
+import main.util.CollisionDetector;
 import main.util.ImageManager;
 import main.util.SoundManager;
 import main.util.animation.Animation;
 import objects.entity.Entity;
+import objects.entity.Player;
+import objects.entity.enemy.Enemy;
+import objects.entity.enemy.Pawn;
+import objects.entity.enemy.boss.Bishop;
+import objects.entity.enemy.boss.Boss;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -21,31 +27,32 @@ public class Staff extends Weapon {
 
     public void init(){
 
-        this.width = 55;
-        this.height = 55;
+        this.name = "Staff";
 
-        this.hitDamage = 2;
-        this.speed = 4;
+        this.width = 85;
+        this.height = 65;
 
-        this.screenXOffset = ((int)(entity.getWidth() * 0.25));
-        this.screenYOffset = ((int)(entity.getHeight() * 0.15));
+        this.screenXOffset = ((int)(entity.getWidth() * 0.02));
+        this.screenYOffset = ((int)(entity.getHeight() * 0.02));
 
         this.image = ImageManager.loadBufferedImage("res/images/objects/staff/staff_1.png");
         this.soundManager = SoundManager.getInstance();
         setupAnimation();
+        this.collision = () -> { };
     }
 
     public void setupAnimation(){
         animation = new Animation(gp, this);
         animation.addFrame(image, 100); //First frame should be default image
-        animation.addFrame(ImageManager.loadBufferedImage("res/images/objects/staff/staff_1.png"), 250);
-        animation.addFrame(ImageManager.loadBufferedImage("res/images/objects/staff/staff_2.png"), 250);
-        animation.addFrame(ImageManager.loadBufferedImage("res/images/objects/staff/staff_3.png"), 250);
+        animation.addFrame(ImageManager.loadBufferedImage("res/images/objects/staff/staff_1.png"), 100);
+        animation.addFrame(ImageManager.loadBufferedImage("res/images/objects/staff/staff_2.png"), 50);
+        animation.addFrame(ImageManager.loadBufferedImage("res/images/objects/staff/staff_3.png"), 100);
+        animation.addFrame(ImageManager.loadBufferedImage("res/images/objects/staff/staff_4.png"), 200);
     }
 
     @Override
     public void draw(Graphics2D g2) {
-
+        super.draw(g2);
         if(isAnimating())
             animation.draw(g2);
 
@@ -58,7 +65,7 @@ public class Staff extends Weapon {
 
     @Override
     public void update() {
-
+        super.update();
         if(entity.getFacing() == Entity.FACING_LEFT){
             width = -Math.abs(width);
         } else if(entity.getFacing() == Entity.FACING_RIGHT){
@@ -90,6 +97,11 @@ public class Staff extends Weapon {
         }
     }
 
+    @Override
+    public Rectangle getHitBox(){ //Projectile weapon doesn't have a hitbox
+        return new Rectangle(screenX, screenY, 0, 0);
+    }
+
 
     /*
     ==========================================
@@ -113,9 +125,10 @@ public class Staff extends Weapon {
         }
 
         public void init(){
+            this.name = "Magic";
             this.width = 45;
             this.height = 15;
-            this.hitDamage = 5;
+            this.hitDamage = 12;
             speedX = 10;
 
             this.screenXOffset = weapon.getScreenXOffset() + ((int)(weapon.getWidth() * 0.75));
@@ -126,6 +139,7 @@ public class Staff extends Weapon {
 
             this.image = ImageManager.loadBufferedImage("res/images/objects/staff/projectile/projectile_1.png");
             setupAnimation();
+            this.collision = projectileCollision;
         }
 
         public void setupAnimation(){
@@ -139,13 +153,14 @@ public class Staff extends Weapon {
 
         @Override
         public void draw(Graphics2D g2) {
-
+            super.draw(g2);
             if(isAnimating())
                 animation.draw(g2);
         }
 
         @Override
         public void update() {
+            super.update();
             if(facing == Entity.FACING_LEFT)
                 worldX -= speedX;
             else if(facing == Entity.FACING_RIGHT)
@@ -162,6 +177,34 @@ public class Staff extends Weapon {
 
         @Override public void attack() {}
 
+        Runnable projectileCollision = () -> {
+            if(entity instanceof Player){
+                if(collidingObject instanceof Enemy){
+                    System.out.println("[" + name +"] Player hit a enemy");
+                    Enemy enemy = (Enemy) collidingObject;
+                    enemy.takeDamage(hitDamage);
+                    collidingObject = null;
+                    this.destroy();
+
+                    if(animation == null)
+                        startCollisionDelay(500);
+                    else startCollisionDelay((int) animation.getTotalDuration());
+                }
+            } else if(entity instanceof Enemy){
+                if(collidingObject instanceof Player){
+                    System.out.println("[" + name +"] Enemy hit a player");
+                    Player player = (Player) collidingObject;
+                    player.takeDamage(hitDamage);
+                    collidingObject = null;
+                    this.destroy();
+
+                    if(animation == null)
+                        startCollisionDelay(500);
+                    else startCollisionDelay((int) animation.getTotalDuration());
+
+                }
+            }
+        };
     }
 
 }

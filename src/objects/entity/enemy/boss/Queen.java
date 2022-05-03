@@ -1,11 +1,11 @@
 package objects.entity.enemy.boss;
 
-import java.awt.Graphics2D;
-
 import main.GamePanel;
 import main.util.ImageManager;
 import main.util.SoundManager;
-import objects.weapon.Cannon;
+import objects.weapon.Sceptre;
+
+import java.awt.*;
 
 public class Queen extends Boss {
 
@@ -21,17 +21,19 @@ public class Queen extends Boss {
 		this.worldX = (gp.maxScrollCol-3) * gp.tileSize;
 		this.worldY = gp.worldFloorY - height;
 
-		setSpeedX(22);
-		setSpeedY(7);
+		setSpeedX(15);
+		setSpeedY(10);
+		this.hp = 700;
+		this.maxHP = hp;
 
         this.image = ImageManager.loadBufferedImage("res/images/entity/W_Queen.png");
         this.soundManager = SoundManager.getInstance();
 
-		setWeapon(new Cannon(gp, this));
-		this.weapon.setWidth(100);
-		this.weapon.setHeight(55);
+		setWeapon(new Sceptre(gp, this));
+		this.weapon.setWidth(195);
+		this.weapon.setHeight(100);
 		this.weapon.setScreenXOffset(((int)(getWidth() * 0.45)));
-		this.weapon.setScreenYOffset(((int)(getHeight() * 0.55)));
+		this.weapon.setScreenYOffset(((int)(getHeight() * 0.25)));
     }
 
 	@Override
@@ -42,6 +44,7 @@ public class Queen extends Boss {
 
 	@Override
 	public void draw(Graphics2D g2) {
+		super.draw(g2);
 		screenX = worldX - gp.player.getWorldX() + gp.player.getScreenX();
 		screenY = worldY;
 

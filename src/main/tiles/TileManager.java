@@ -9,8 +9,8 @@ import java.awt.Graphics2D;
 
 public class TileManager {
     GamePanel gp;
-    Tile[] tiles;
-    int tileNum[][];
+    public Tile[] tiles;
+    public int tileNum[][];
     BufferedImage bg_img;
 
     public TileManager(GamePanel gp) {
