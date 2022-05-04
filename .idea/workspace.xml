@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="dd85d6a6-4323-44ac-9340-0139a725dbcd" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Once-A-Pawn-a-Time-main/main/GameApplication.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Once-A-Pawn-a-Time-main/main/GamePanel.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Once-A-Pawn-a-Time-main/main/GameWindow.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Once-A-Pawn-a-Time-main/main/states/GameStateManager.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Once-A-Pawn-a-Time-main/main/tiles/Tile.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Once-A-Pawn-a-Time-main/main/tiles/TileManager.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Once-A-Pawn-a-Time-main/main/tiles/TileMap.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Once-A-Pawn-a-Time-main/main/ui/HealthBar.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Once-A-Pawn-a-Time-main/main/ui/UI.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Once-A-Pawn-a-Time-main/main/ui/UI_Button.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Once-A-Pawn-a-Time-main/main/util/CollisionDetector.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Once-A-Pawn-a-Time-main/main/util/ImageManager.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Once-A-Pawn-a-Time-main/main/util/KeyHandler.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Once-A-Pawn-a-Time-main/main/util/MouseHandler.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Once-A-Pawn-a-Time-main/main/util/SoundManager.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Once-A-Pawn-a-Time-main/main/util/Utils.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Once-A-Pawn-a-Time-main/main/util/animation/AnimFrame.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Once-A-Pawn-a-Time-main/main/util/animation/Animation.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Once-A-Pawn-a-Time-main/objects/Delay$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Once-A-Pawn-a-Time-main/objects/Delay.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Once-A-Pawn-a-Time-main/objects/GameObject$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Once-A-Pawn-a-Time-main/objects/GameObject.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Once-A-Pawn-a-Time-main/objects/HealthPack.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Once-A-Pawn-a-Time-main/objects/NextLevelDoor.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Once-A-Pawn-a-Time-main/objects/entity/Entity.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Once-A-Pawn-a-Time-main/objects/entity/Player.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Once-A-Pawn-a-Time-main/objects/entity/enemy/Enemy.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Once-A-Pawn-a-Time-main/objects/entity/enemy/EnemyAI.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Once-A-Pawn-a-Time-main/objects/entity/enemy/Pawn.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Once-A-Pawn-a-Time-main/objects/entity/enemy/boss/Bishop.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Once-A-Pawn-a-Time-main/objects/entity/enemy/boss/Boss.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Once-A-Pawn-a-Time-main/objects/entity/enemy/boss/Knight.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Once-A-Pawn-a-Time-main/objects/entity/enemy/boss/Queen.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Once-A-Pawn-a-Time-main/objects/entity/enemy/boss/Rook.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Once-A-Pawn-a-Time-main/objects/weapon/Weapon.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Once-A-Pawn-a-Time-main/objects/weapon/melee/Dagger.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Once-A-Pawn-a-Time-main/objects/weapon/melee/MeleeWeapon.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Once-A-Pawn-a-Time-main/objects/weapon/melee/Spear.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Once-A-Pawn-a-Time-main/objects/weapon/melee/Sword.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Once-A-Pawn-a-Time-main/objects/weapon/ranged/Cannon$Ball.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Once-A-Pawn-a-Time-main/objects/weapon/ranged/Cannon.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Once-A-Pawn-a-Time-main/objects/weapon/ranged/Projectile.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Once-A-Pawn-a-Time-main/objects/weapon/ranged/RangedWeapon.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Once-A-Pawn-a-Time-main/objects/weapon/ranged/Sceptre$Magic.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Once-A-Pawn-a-Time-main/objects/weapon/ranged/Sceptre.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Once-A-Pawn-a-Time-main/objects/weapon/ranged/Staff$Spell.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Once-A-Pawn-a-Time-main/objects/weapon/ranged/Staff.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/util/KeyHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/util/KeyHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/objects/entity/Entity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/objects/entity/Entity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/objects/entity/enemy/boss/Queen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/objects/entity/enemy/boss/Queen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/objects/entity/enemy/boss/Rook.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/objects/entity/enemy/boss/Rook.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="28i87veP6WhEuAWKiicim0iWj1D" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="false" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.17" />
+    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="settings.editor.selected.configurable" value="android.project.structure" />
+  </component>
+  <component name="RunManager">
+    <configuration name="GameApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="main.GameApplication" />
+      <module name="Once-A-Pawn-a-Time" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="main.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.GameApplication" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="dd85d6a6-4323-44ac-9340-0139a725dbcd" name="Default Changelist" comment="" />
+      <created>1651687885255</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1651687885255</updated>
+      <workItem from="1651687889666" duration="2328000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
