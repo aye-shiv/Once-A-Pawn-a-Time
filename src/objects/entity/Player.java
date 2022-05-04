@@ -73,8 +73,9 @@ public class Player extends Entity {
         if(gp.getKeyHandler().spacePressed){
             weapon.attack();
 
-            /*
+
             gp.boss.weapon.attack();
+            /*
             for(Pawn pawn: new ArrayList<>(gp.pawns)){
                 pawn.weapon.attack();
             }

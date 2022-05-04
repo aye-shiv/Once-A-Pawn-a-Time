@@ -26,9 +26,11 @@ public class GameStateManager {
     protected static final int PAUSE = 2;
     protected static final int GAMEOVER = 3;
     protected static final int WIN = 4;
+    protected static final int SPLASH = 5;
     protected int currentState;
 
-    protected boolean increaseLevel = false;
+    public boolean nextLevelFlag = false;
+    boolean increaseLevel = false;
     protected int level;
 
     public GameStateManager(GamePanel gp){
@@ -55,6 +57,7 @@ public class GameStateManager {
                 updateEntities();
                 if(increaseLevel){
                     generateEntities();
+                    setState(SPLASH);
                     increaseLevel = false;
                 }
                 break;
@@ -69,6 +72,11 @@ public class GameStateManager {
                 break;
 
             case WIN:
+                break;
+            case SPLASH:
+                if(gp.getKeyHandler().enterPressed){
+                    setState(PLAY);
+                }
                 break;
         }
     }

@@ -26,7 +26,8 @@ public class UI_Button {
 
     public void update(){
         Rectangle r = new Rectangle(x, y, width, height);
-        if((gp.getMouseHandler().getX()>x && gp.getMouseHandler().getX()<x+width)&&(gp.getMouseHandler().getY()>y&&gp.getMouseHandler().getX()<y+height)){
+        Rectangle r2 = new Rectangle(gp.getMouseHandler().getX(), gp.getMouseHandler().getY(), 3, 3);
+        if(r.contains(r2)){
             isHovered = true;
         }
         else isHovered = false;
@@ -34,7 +35,7 @@ public class UI_Button {
             //System.out.println(name);
             switch(name){
                 case "start":
-                    gp.getGSM().setState(1);
+                    gp.getGSM().setState(5);
                     gp.getMouseHandler().clearMouseClicked();
                     break;
 
