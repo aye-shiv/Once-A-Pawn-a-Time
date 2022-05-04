@@ -9,6 +9,8 @@ public abstract class Enemy extends Entity {
 
 	protected EnemyAI AI;
 	public int hostileRange = 350;
+	public int attackBufCounter = 0;
+	public boolean attacking = true;
 
 	public Enemy(GamePanel gp) {
 		super(gp);
@@ -24,6 +26,7 @@ public abstract class Enemy extends Entity {
 		if(gp.player.getWorldX() > (gp.maxScrollCol-14)*gp.tileSize){
 			screenX = worldX - ((gp.maxScrollCol-15)*gp.tileSize);
 		}
+		if(attacking) attackBufCounter++;
 	}
 
 	@Override

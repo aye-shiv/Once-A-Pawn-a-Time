@@ -14,7 +14,7 @@ public class SoundManager {
         addClip("open_door", "res/sounds/object/open_door.wav");
 
         /*=====entities=====*/
-        addClip("take_health", "res/sounds/object/take_health.wav");
+        addClip("take_health", "res/sounds/sfx/health_pack.wav");
         addClip("death", "res/sounds/object/piece_death.wav");
 
         /*=====weapons=====*/
@@ -32,8 +32,8 @@ public class SoundManager {
         addClip("click", "res/sounds/sfx/click.wav");
         addClip("hover", "res/sounds/sfx/hover_button.wav");
         addClip("splash", "res/sounds/sfx/splash_interact.wav");
-        addClip("health_pack", "res/sounds/sfx/health_pack.wav");
         addClip("game_over", "res/sounds/sfx/game_over.wav");
+        addClip("win", "res/sounds/sfx/win.wav");
     }
 
     public static SoundManager getInstance(){
@@ -81,6 +81,15 @@ public class SoundManager {
 				clip.start();
 		}
 	}
+
+    public void playClip(String title, float gain) {
+        Clip clip = getClip(title);
+        if (clip != null) {
+            FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+            gainControl.setValue(gain); // Reduce volume by 10 decibels.
+            clip.start();
+        }
+    }
 
     public void stopClip(String title) {
 		Clip clip = getClip(title);

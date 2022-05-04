@@ -166,6 +166,12 @@ public class GameStateManager {
         if(gp.door != null) {
             gp.door.update();
             if(gp.door.playerHitDoor) {
+                if(level == 4){
+                    gp.getSound().stopClip("bgm");
+                    gp.getSound().playClip("win");
+                    setState(WIN);
+                    return;
+                }
                 gp.door.playerHitDoor = false;
                 gp.door = null;
                 increaseLvl();

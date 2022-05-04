@@ -21,7 +21,7 @@ public class Rook extends Boss {
 
         setSpeedX(9);
         setSpeedY(8);
-        this.hp = 150;
+        this.hp = 300;
         this.maxHP = hp;
 
         this.image = ImageManager.loadBufferedImage("res/images/entity/W_Rook.png");
