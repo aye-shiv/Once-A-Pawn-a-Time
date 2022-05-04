@@ -21,7 +21,7 @@ public class Queen extends Boss {
 
 		setSpeedX(9);
 		setSpeedY(10);
-		this.hp = 500;
+		this.hp = 400;
 		this.maxHP = hp;
 
         this.image = ImageManager.loadBufferedImage("res/images/entity/W_Queen.png");

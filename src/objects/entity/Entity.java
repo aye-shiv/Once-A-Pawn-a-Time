@@ -19,7 +19,8 @@ public abstract class Entity extends GameObject {
 
     protected Weapon weapon;
     protected int maxHP = 0, hp = 0;
-    protected boolean invincible = false;
+    protected boolean invincible = false, hit_flag = false;
+    protected int hit_buf = 25, hit_buf_count = 25;
 
 
     /* =====Functions to Override==== */
@@ -39,6 +40,7 @@ public abstract class Entity extends GameObject {
     @Override
     public void update(){
         super.update();
+        if(hit_buf_count<hit_buf) hit_buf_count++;
         if(KBDistance <= 0)
             isTakingKB = false;
         if(isTakingKB){
@@ -83,7 +85,7 @@ public abstract class Entity extends GameObject {
 
     /* =====Custom==== */
     public void playTakeHealthSound() { soundManager.playClip("take_health"); }
-    public void playTakeDamageSound() {}
+    public void playTakeDamageSound() {soundManager.playClip("death");}
     public void playDeathSound() { soundManager.playClip("take_damage"); }
 
     public void takeHealth(int health){
@@ -95,11 +97,13 @@ public abstract class Entity extends GameObject {
     }
 
     public void takeDamage(int damage) {
-        if(invincible)
+        if(hit_buf_count < hit_buf) {
             return;
+        }
         playTakeDamageSound();
         takeKB();
         hp -= damage;
+        hit_buf_count=0;
         if(hp <= 0){
             hp = 0;
             destroy();

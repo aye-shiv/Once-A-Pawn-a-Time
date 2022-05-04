@@ -52,20 +52,20 @@ public class KeyHandler implements KeyListener {
 		if(keyCode == KeyEvent.VK_ESCAPE){
 			gp.getGSM().setState(2);
 		}
-		if(keyCode == KeyEvent.VK_BACK_SPACE){
-			gp.getGSM().setState(1);
-		}
 
 		// FOR TESTING
-		if(keyCode == KeyEvent.VK_2){
-			if(gp.getGSM().getLevel()<2)gp.getGSM().increaseLvl();
-		}
-		if(keyCode == KeyEvent.VK_3){
-			if(gp.getGSM().getLevel()<3)gp.getGSM().increaseLvl();
-		}
-		if(keyCode == KeyEvent.VK_4){
-			if(gp.getGSM().getLevel()<4)gp.getGSM().increaseLvl();
-		}
+//		if(keyCode == KeyEvent.VK_2){
+//			if(gp.getGSM().getLevel()<2)gp.getGSM().increaseLvl();
+//		}
+//		if(keyCode == KeyEvent.VK_3){
+//			if(gp.getGSM().getLevel()<3)gp.getGSM().increaseLvl();
+//		}
+//		if(keyCode == KeyEvent.VK_4){
+//			if(gp.getGSM().getLevel()<4)gp.getGSM().increaseLvl();
+//		}
+//		if(keyCode == KeyEvent.VK_BACK_SPACE){
+//			gp.getGSM().setState(1);
+//		}
     }
 
     @Override
